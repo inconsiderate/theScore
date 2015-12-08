@@ -1,0 +1,53 @@
+<template name="mainLayout">
+
+    <a class="menuToggle"><i class="sidebar icon"></i></a>
+
+    <div class="ui left vertical inverted sidebar labeled icon menu">
+
+        {{#if currentUser}}
+            <a href="/profile/{{currentUser._id}}" class="item">
+                <i class="user icon"></i>
+                My Profile
+            </a>
+        {{else}}
+        <a href="/" class="item">
+            <i class="home icon"></i>
+            Home
+        </a>
+        {{/if}}
+
+        {{#if currentUser}}
+        <a class="item">
+            <i class="users icon"></i>
+            My Team
+        </a>
+        {{/if}}
+
+        <a class="item">
+            <i class="game icon"></i>
+            /Find Games/
+        </a>
+        <a class="item">
+            <i class="child icon"></i>
+            /Browse Teams/
+        </a>
+
+        {{#if currentUser}}
+            <a class="item">
+                <i class="options icon"></i>
+                /Settings/
+            </a>
+            {{> atNavButton}}
+        {{/if}}
+
+    </div>
+
+    <div class="pusher">
+        {{> yield "mainContent"}}
+    </div>
+
+    <container id="footer">
+        <!--{{> yield "footer"}}-->
+    </container>
+
+</template>
