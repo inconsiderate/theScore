@@ -6,6 +6,7 @@ Template.mainLayout.events({
     "click .item": function() {
         $('.ui.sidebar').sidebar('hide');
     }
+
 });
 
 

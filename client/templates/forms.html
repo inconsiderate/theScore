@@ -1,0 +1,69 @@
+
+<template name="submitgame">
+    <br><br><br>
+
+    <h2>Who Played?</h2><br>
+
+    <form class="ui form completedGame">
+
+        {{#each teamMembers}}
+            {{>teamMember}}
+        {{/each}}
+
+        <div class="inline fields">
+            <br>
+            <h2><label for="winner">Who Won?</label></h2><br>
+            <div class="field">
+                <div class="ui radio checkbox">
+                    <input type="radio" name="winner" value="survivor" checked="" tabindex="0" class="hidden">
+                    <label>Survivor</label>
+                </div>
+            </div>
+            <div class="field">
+                <div class="ui radio checkbox">
+                    <input type="radio" name="winner" value="savior" tabindex="0" class="hidden">
+                    <label>Savior</label>
+                </div>
+            </div>
+            <div class="field">
+                <div class="ui radio checkbox">
+                    <input type="radio" name="winner" value="loner" tabindex="0" class="hidden">
+                    <label>Loner</label>
+                </div>
+            </div>
+        </div>
+
+        <button class="ui button" type="submit">Submit</button>
+
+    </form>
+</template>
+
+<template name="teamMember">
+    <div class="inline fields">
+        <h3>{{profile.username}}</h3><br>
+        <div class="field">
+            <div class="ui radio checkbox">
+                <input type="radio" name="{{profile.username}}-faction" value="survivor" tabindex="0" class="hidden">
+                <label>Survivor</label>
+            </div>
+        </div>
+        <div class="field">
+            <div class="ui radio checkbox">
+                <input type="radio" name="{{profile.username}}-faction" value="savior" tabindex="0" class="hidden">
+                <label>Savior</label>
+            </div>
+        </div>
+        <div class="field">
+            <div class="ui radio checkbox">
+                <input type="radio" name="{{profile.username}}-faction" value="loner" tabindex="0" class="hidden">
+                <label>Loner</label>
+            </div>
+        </div>
+        <div class="field">
+            <div class="ui radio checkbox">
+                <input type="radio" name="{{profile.username}}-faction" value="abstain" tabindex="0" checked="" class="hidden">
+                <label>Didn't Play</label>
+            </div>
+        </div>
+    </div>
+</template>

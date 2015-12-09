@@ -1,6 +1,5 @@
 <template name="mainLayout">
-
-    <a class="menuToggle"><i class="sidebar icon"></i></a>
+    <a class="menuToggle"><span>theScore</span><i class="sidebar icon"></i></a>
 
     <div class="ui left vertical inverted sidebar labeled icon menu">
 
@@ -25,11 +24,11 @@
 
         <a class="item">
             <i class="game icon"></i>
-            /Find Games/
+            My Games
         </a>
-        <a class="item">
+        <a href ="/submitgame" class="item">
             <i class="child icon"></i>
-            /Browse Teams/
+            Log New Game
         </a>
 
         {{#if currentUser}}
