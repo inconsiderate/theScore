@@ -21,6 +21,7 @@ Template.submitgame.events({
         results['dana'] = $("input[name='dana-faction']:checked").val();
         results['roger'] = $("input[name='roger-faction']:checked").val();
         results['oscar'] = $("input[name='oscar-faction']:checked").val();
+        results['siobhan'] = $("input[name='siobhan-faction']:checked").val();
 
         Meteor.call('submitNewGame', results);
     }

@@ -9,6 +9,15 @@ if (Meteor.isServer) {
             password: 'password',
             profile: {
                 username: 'mike',
+                bio: "the second most amazing person you'll ever meet.",
+                team: 'kiwi'
+            }
+        });
+        var siobhan = Accounts.createUser({
+            email: 'siobhan@gmail.com',
+            password: 'password',
+            profile: {
+                username: 'siobhan',
                 bio: "the most amazing person you'll ever meet.",
                 team: 'kiwi'
             }
@@ -67,8 +76,7 @@ if (Meteor.isServer) {
             name: 'kiwi',
             description: 'This is the best team ever',
             createdAt: new Date(),
-            captain: mike,
-            members: [mike, alex, devon, jamie],
+            members: [mike, alex, devon, jamie, siobhan],
             likes: Math.floor((Math.random() * 100) + 1)
         });
 
@@ -76,7 +84,6 @@ if (Meteor.isServer) {
             name: 'awesomesauce',
             description: 'This is the best team ever',
             createdAt: new Date(),
-            captain: krissy,
             members: [krissy, roger],
             likes: Math.floor((Math.random() * 100) + 1)
         });
