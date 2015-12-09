@@ -2,9 +2,18 @@
 <template name="submitgame">
     <br><br><br>
 
-    <h2>Who Played?</h2><br>
-
     <form class="ui form completedGame">
+
+        <select name="game" class="ui fluid search dropdown" required>
+            <option value="">Which Game Did You Play?</option>
+            <option value="bangthedicegamewalkingdead">Bang! The Dice Game - Walking Dead</option>
+            <option value="monopoly">Monopoly</option>
+            <option value="gameoflife">The Game of Life</option>
+            <option value="spinthebottle">Spin The Bottle</option>
+            <option value="pandemic">Pandemic</option>
+        </select>
+
+        <h2>Who Played?</h2><br>
 
         {{#each teamMembers}}
             {{>teamMember}}

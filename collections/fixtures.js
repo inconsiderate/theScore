@@ -9,7 +9,7 @@ if (Meteor.isServer) {
             password: 'password',
             profile: {
                 username: 'mike',
-                age: '18',
+                bio: "the most amazing person you'll ever meet.",
                 team: 'kiwi'
             }
         });
@@ -81,4 +81,5 @@ if (Meteor.isServer) {
             likes: Math.floor((Math.random() * 100) + 1)
         });
     }
+
 }
