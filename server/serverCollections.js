@@ -10,12 +10,15 @@ Meteor.publish('games', function() {
     return Games.find();
 });
 
+Meteor.publish('userScores', function() {
+    return UserScores.find();
+});
+
 
 Meteor.methods({
     submitNewGame: function (results) {
 
         for (var username in results) {
-            console.log(results);
             var id = Meteor.users.findOne({ "profile.username" : username }),
                 winQuery = {},
                 playedQuery = {},
@@ -32,11 +35,9 @@ Meteor.methods({
             } else if (username === 'game') {
                 //insert the game played to the Teams
             } else {
-                console.log(faction, results.winner);
                 if (faction == results.winner) {
                     Meteor.users.update(id, {$inc: winQuery});
                 }
-                console.log('I AM HERE!');
                 Meteor.users.update(id, {$inc: playedQuery});
             }
         }
