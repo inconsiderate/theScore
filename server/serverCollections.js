@@ -14,33 +14,35 @@ Meteor.publish('userScores', function() {
     return UserScores.find();
 });
 
-
-Meteor.methods({
-    submitNewGame: function (results) {
-
-        for (var username in results) {
-            var id = Meteor.users.findOne({ "profile.username" : username }),
-                winQuery = {},
-                playedQuery = {},
-                faction = results[username],
-                gameWon = "profile.games."+results.game+"."+faction,
-                gamePlayed = "profile.games."+results.game+".plays";
-            winQuery[gameWon] = 1;
-            playedQuery[gamePlayed] = 1;
-
-            if (faction === 'abstain') {break;}
-
-            if (username === 'winner') {
-                //insert the winning team to the Teams
-            } else if (username === 'game') {
-                //insert the game played to the Teams
-            } else {
-                if (faction == results.winner) {
-                    Meteor.users.update(id, {$inc: winQuery});
-                }
-                Meteor.users.update(id, {$inc: playedQuery});
-            }
-        }
-        return "game submitted";
-    }
-});
+//Meteor.methods({
+//    submitNewGame: function (game, team) {
+//
+//        for (var u in results) {
+//            var userID = Meteor.users.findOne({ "profile.username" : u }),
+//                gameID = Games.findOne({ name : results.game }),
+//                winQuery = {},
+//                playedQuery = {},
+//                playerWins = false,
+//                faction = results[u];
+//            winQuery[gameWon] = 1;
+//            playedQuery[gamePlayed] = 1;
+//
+//            if (faction === 'abstain') {break;}
+//
+//            if (username === 'winner') {}
+//            else if (username === 'game') {} else {
+//                if (faction == results.winner) {
+//                    playerWins = true;
+//                }
+//                var newScore = UserScore.create({
+//                    userID: userID,
+//                    gameID: gameID,
+//                    won: playerWins,
+//                    faction: faction,
+//                    createdAt: new Date()
+//                });
+//            }
+//        }
+//        return "game submitted";
+//    }
+//});

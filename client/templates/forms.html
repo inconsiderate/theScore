@@ -1,46 +1,50 @@
 
-<template name="submitgame">
+<template name="chooseTeamGame">
+    <container id="chooseTeamContainer">
+        <br><br><br><br><br><br>
+
+        <form class="chooseTeamGameForm">
+            <div class="ui form">
+                <div class="field">
+                    <label >Choose a Team</label>
+                    <select name="team" class="ui dropdown">
+                        {{#each teams}}
+                            <option value="{{_id}}">{{name}}</option>
+                            <br>
+                        {{/each}}
+                    </select>
+                </div>
+
+                <br><br>
+
+                <div class="field">
+                    <label>Choose a Game</label>
+                    <select name="game" class="ui dropdown">
+                    {{#each games}}
+                        <option value="{{_id}}">{{name}}</option>
+                        <br>
+                    {{/each}}
+                    </select>
+                </div>
+            </div>
+            <br><br>
+            <button class="ui button" type="submit">Submit</button>
+        </form>
+
+    </container>
+</template>
+
+<template name="newScore">
     <br><br><br>
-
     <form class="ui form completedGame">
-        <div>Team Name: {{name}}</div>
-        <div>Description: {{description}}</div>
-        <select name="game" class="ui fluid search dropdown" required>
-            <option value="">Which Game To Play?</option>
-            <option value="bangthedicegamewalkingdead">Bang! The Dice Game - Walking Dead</option>
-            <option value="monopoly">Monopoly</option>
-            <option value="gameoflife">The Game of Life</option>
-            <option value="spinthebottle">Spin The Bottle</option>
-            <option value="pandemic">Pandemic</option>
-        </select>
-
-        <h2>Who Played?</h2><br>
-
-        {{#each teamMembers}}
-            {{>teamMember}}
-        {{/each}}
-
+        <strong>Game Name:</strong> <span>{{name}}</span>
+        <br>
+        <strong>Description:</strong> <span>{{description}}</span>
         <div class="inline fields">
-            <br>
+            {{#each teamMembers}}
+                {{> teamMember}}
+            {{/each}}
             <h2><label for="winner">Who Won?</label></h2><br>
-            <div class="field">
-                <div class="ui radio checkbox">
-                    <input type="radio" name="winner" value="survivor" checked="" tabindex="0" class="hidden">
-                    <label>Survivor</label>
-                </div>
-            </div>
-            <div class="field">
-                <div class="ui radio checkbox">
-                    <input type="radio" name="winner" value="savior" tabindex="0" class="hidden">
-                    <label>Savior</label>
-                </div>
-            </div>
-            <div class="field">
-                <div class="ui radio checkbox">
-                    <input type="radio" name="winner" value="loner" tabindex="0" class="hidden">
-                    <label>Loner</label>
-                </div>
-            </div>
         </div>
 
         <button class="ui button" type="submit">Submit</button>
@@ -49,31 +53,17 @@
 </template>
 
 <template name="teamMember">
-    <div class="inline fields">
-        <h3>{{profile.username}}</h3><br>
-        <div class="field">
-            <div class="ui radio checkbox">
-                <input type="radio" name="{{profile.username}}-faction" value="survivor" tabindex="0" class="hidden">
-                <label>Survivor</label>
-            </div>
-        </div>
-        <div class="field">
-            <div class="ui radio checkbox">
-                <input type="radio" name="{{profile.username}}-faction" value="savior" tabindex="0" class="hidden">
-                <label>Savior</label>
-            </div>
-        </div>
-        <div class="field">
-            <div class="ui radio checkbox">
-                <input type="radio" name="{{profile.username}}-faction" value="loner" tabindex="0" class="hidden">
-                <label>Loner</label>
-            </div>
-        </div>
-        <div class="field">
-            <div class="ui radio checkbox">
-                <input type="radio" name="{{profile.username}}-faction" value="abstain" tabindex="0" checked="" class="hidden">
-                <label>Didn't Play</label>
-            </div>
+    <div class="field">
+        <p>{{profile.username}}</p>
+        <div class="ui radio checkbox factionSelect">
+            <select name="{{profile.username}}" class="ui dropdown">
+                {{#with ..}}
+                    {{#each faction}}
+                        <input type="radio" name="{{this}}" value="{{_id}}" checked="" tabindex="0" class="hidden">
+                        <label>{{this}}</label>
+                    {{/each}}
+                {{/with}}
+            </select>
         </div>
     </div>
 </template>
