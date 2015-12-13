@@ -185,7 +185,7 @@ if (Meteor.isServer) {
             name: 'Bang! The Dice Game - Walking Dead Edition',
             description: 'Do you like zombies and rolling dice? This is the game for you!',
             createdAt: new Date(),
-            faction: ['saviors', 'survivors', 'loner'],
+            faction: ['Savior', 'Survivor', 'Loner'],
             likes: Math.floor((Math.random() * 100) + 1)
         });
 
