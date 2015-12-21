@@ -1,5 +1,5 @@
 Meteor.startup(function () {
-    AutoForm.setDefaultTemplate("semanticUI");
+    //AutoForm.setDefaultTemplate("semanticUI");
 });
 
 //Template.submitNewGame.events({
@@ -24,13 +24,17 @@ Meteor.startup(function () {
 Template.newScore.events({
     "submit .submitNewGame": function (event) {
         event.preventDefault();
-        var game = this._id;
-        var team = event.target.team.value;
-        var teammates = Meteor.users.find({'profile.teams': team});
+        var results = {};
+        results.game = this._id;
+        results.team = event.target.team.value;
+        var teammates = Meteor.users.find({'profile.teams': results.team});
         teammates.forEach(function(row) {
-            //do a userScore DB insert if event[row.profile.username].value != absent
-            console.log(row.profile.username);
+            console.log('id', row._id);
+            var query = 'event.target.'+row._id+'.value;';
+            results.faction = eval(query);
+            //Meteor.call('insertUserScore', results);
         });
+        console.log('results', results);
     }
 });
 
@@ -64,6 +68,6 @@ Template.chooseTeamGame.events({
         event.preventDefault();
         var team = event.target.team.value;
         var game = event.target.game.value;
-        Router.go('/newScore?team='+team);
+        Router.go('/newScore?team='+team+'&game='+game);
     }
 });

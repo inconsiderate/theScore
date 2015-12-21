@@ -33,10 +33,9 @@
 <template name="newScore">
     <br><br><br>
     <form class="ui form submitNewGame">
-        <strong>Game Name:</strong> <span>{{name}}</span>
-        <input type="hidden" name="team" value="{{getUrlVars 'team'}}">
+        <h3><span>{{name}}</span></h3>
+        <input type="hidden" id = "teamName" name="team" value="{{getUrlVars 'team'}}">
         <br>
-        <strong>Description:</strong> <span>{{description}}</span>
         <div class="inline fields">
             {{#each teamMembers}}
                 {{> teamMember}}
