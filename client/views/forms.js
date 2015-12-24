@@ -25,16 +25,15 @@ Template.newScore.events({
     "submit .submitNewGame": function (event) {
         event.preventDefault();
         var results = {};
+        results.winner = 'loner';
         results.game = this._id;
         results.team = event.target.team.value;
         var teammates = Meteor.users.find({'profile.teams': results.team});
         teammates.forEach(function(row) {
-            console.log('id', row._id);
-            var query = 'event.target.'+row._id+'.value;';
-            results.faction = eval(query);
-            //Meteor.call('insertUserScore', results);
+            var id = row._id;
+            results[id] = event.target[id].value;
         });
-        console.log('results', results);
+        Meteor.call('insertUserScore', results);
     }
 });
 
