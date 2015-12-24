@@ -2,38 +2,29 @@ Meteor.startup(function () {
     //AutoForm.setDefaultTemplate("semanticUI");
 });
 
-//Template.submitNewGame.events({
-//    "submit .completedGame": function (event, template) {
-//        event.preventDefault();
-//        //var teammates = [];
-//        //for (var i of this.members) {
-//        //    var u = Meteor.users.findOne({_id: i});
-//        //    teammates.push(u);
-//        //}
-//
-//        var results = {};
-//        results['winner'] = event.target.winner.value;
-//        results['game'] = event.target.game.value;
-//        results['mike'] = $("input[name='mike-faction']:checked").val();
-//        results['oscar'] = $("input[name='oscar-faction']:checked").val();
-//
-//        Meteor.call('submitNewGame', results);
-//    }
-//});
-
 Template.newScore.events({
     "submit .submitNewGame": function (event) {
         event.preventDefault();
         var results = {};
-        results.winner = 'loner';
+        results.winner = event.target.winner.value;
         results.game = this._id;
         results.team = event.target.team.value;
         var teammates = Meteor.users.find({'profile.teams': results.team});
         teammates.forEach(function(row) {
             var id = row._id;
-            results[id] = event.target[id].value;
+            var value = event.target[id].value;
+            if (value != 'absent') {
+                results[id] = value;
+            }
         });
-        Meteor.call('insertUserScore', results);
+        console.log(results);
+        Meteor.call("insertUserScore", results, function(error, success){
+            if(error){
+                alert(error);
+                return;
+            }
+            Router.go('/profile/'+Meteor.userId());
+        });
     }
 });
 

@@ -34,13 +34,24 @@
     <br><br><br>
     <form class="ui form submitNewGame">
         <h3><span>{{name}}</span></h3>
-        <input type="hidden" id = "teamName" name="team" value="{{getUrlVars 'team'}}">
+        <input type="hidden" id="teamName" name="team" value="{{getUrlVars 'team'}}">
+        <br>
+        <div class="ui form">
+            <div class="field">
+                <label for="winner">Winner: </label>
+                <select name="winner" class="ui dropdown">
+                    <option value="">Who won this game?</option>
+                    {{#each faction}}
+                        <option value="{{this}}">{{this}}</option>
+                    {{/each}}
+                </select>
+            </div>
+        </div>
         <br>
         <div class="inline fields">
             {{#each teamMembers}}
                 {{> teamMember}}
             {{/each}}
-            <h2><label for="winner">Who Won?</label></h2><br>
         </div>
         <button class="ui button" type="submit">Submit</button>
     </form>
