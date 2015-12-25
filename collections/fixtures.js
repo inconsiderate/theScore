@@ -1,6 +1,5 @@
 
 if (Meteor.isServer) {
-
     if (Teams.find().count() < 3) {
         Teams.remove({});
 
@@ -22,10 +21,6 @@ if (Meteor.isServer) {
             createdAt: new Date(),
             likes: Math.floor((Math.random() * 100) + 1)
         });
-    }
-
-    if (Meteor.users.find().count() < 11) {
-        Meteor.users.remove({});
 
         var mike = Accounts.createUser({
             email: 'mike@gmail.com',
@@ -176,11 +171,6 @@ if (Meteor.isServer) {
             }
         });
 
-    }
-
-    if (Games.find().count() < 4) {
-        Games.remove({});
-
         var bang = Games.insert({
             name: 'Bang! The Dice Game - Walking Dead Edition',
             description: 'Do you like zombies and rolling dice? This is the game for you!',
@@ -200,6 +190,7 @@ if (Meteor.isServer) {
             name: 'Monopoly',
             description: 'How big is your wad?',
             createdAt: new Date(),
+            faction: ['Horse', 'Thimble', 'Shoe', 'Racecar', 'Wheelbarrel'],
             likes: Math.floor((Math.random() * 100) + 1)
         });
 
@@ -209,26 +200,36 @@ if (Meteor.isServer) {
             createdAt: new Date(),
             likes: Math.floor((Math.random() * 100) + 1)
         });
-    }
-    Meteor.users.update(mike, {
-        $push: {
-            "profile.myGames": bang
-        }
-    });
-    Meteor.users.update(mike, {
-        $push: {
-            "profile.myGames": pandemic
-        }
-    });
-    Meteor.users.update(mike, {
-        $push: {
-            "profile.myGames": monopoly
-        }
-    });
-    Meteor.users.update(mike, {
-        $push: {
-            "profile.myGames": poker
-        }
-    });
+        Meteor.users.update(mike, {
+            $push: {
+                "profile.myGames": bang
+            }
+        });
+        Meteor.users.update(mike, {
+            $push: {
+                "profile.myGames": pandemic
+            }
+        });
+        Meteor.users.update(mike, {
+            $push: {
+                "profile.myGames": monopoly
+            }
+        });
+        Meteor.users.update(mike, {
+            $push: {
+                "profile.myGames": poker
+            }
+        });
 
+        var mikeBangScore = UserScores.insert({
+            userID: mike,
+            gameID: bang,
+            createdAt: new Date(),
+            scores: {
+                saviors: 2,
+                survivors: 1,
+                losses: 9
+            }
+        })
+    }
 }

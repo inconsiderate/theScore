@@ -1,7 +1,4 @@
 Meteor.methods({
-    getUrlVars: function () {
-        //....
-    },
 
     insertUserScore: function (results) {
         if (Object.keys(results).length > 3) {

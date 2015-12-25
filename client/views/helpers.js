@@ -9,4 +9,9 @@ if (Meteor.isClient) {
         }
         return vars[context];
     });
+
+    Template.registerHelper('gameTitle', function (context) {
+        var u = Games.findOne({_id: context});
+        return u.name;
+    })
 }
