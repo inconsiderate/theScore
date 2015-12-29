@@ -221,15 +221,25 @@ if (Meteor.isServer) {
             }
         });
 
-        var mikeBangScore = UserScores.insert({
+        UserScores.insert({
             userID: mike,
             gameID: bang,
             createdAt: new Date(),
             scores: {
-                saviors: 2,
-                survivors: 1,
-                losses: 9
-            }
-        })
+                Saviors: 2,
+                Survivors: 1
+            },
+            losses: 48
+        });
+        UserScores.insert({
+            userID: mike,
+            gameID: monopoly,
+            createdAt: new Date(),
+            scores: {
+                Horse: 3,
+                Thimble: 2
+            },
+            losses: 3
+        });
     }
 }

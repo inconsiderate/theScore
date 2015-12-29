@@ -10,7 +10,6 @@ Template.gameAccordion.helpers({
         for (var key in scores) {
             sum += scores[key];
         }
-        sum -= this.scores['losses'];
         return sum;
     },
     totalGames: function() {
@@ -18,18 +17,18 @@ Template.gameAccordion.helpers({
         for (var key in scores) {
             sum += scores[key];
         }
+        sum += this.losses;
         return sum;
-    }
-    //scoresArray: function() {
-    //    var arr = [], scores = this.scores;
-    //    for (var key in scores) {
-    //        var obj = {};
-    //        obj[key] = scores[key];
-    //        arr.push(obj);
-    //    }
-    //    return arr;
-    //},
-    //score: function() {
-    //    return this.scores;
-    //}
+    },
+    scoresArray: function () {
+        var arr = [], scores = this.scores;
+        for (var key in scores) {
+            var obj = {};
+            obj.key = key;
+            obj.value = scores[key];
+            arr.push(obj);
+        }
+        console.log(arr);
+        return arr;
+    },
 });
