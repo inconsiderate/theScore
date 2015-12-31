@@ -175,7 +175,7 @@ if (Meteor.isServer) {
             name: 'Bang! The Dice Game - Walking Dead Edition',
             description: 'Do you like zombies and rolling dice? This is the game for you!',
             createdAt: new Date(),
-            faction: ['Savior', 'Survivor', 'Loner'],
+            faction: ['Savior', 'Survivor', 'Hilltop', 'Kingdom'],
             likes: Math.floor((Math.random() * 100) + 1)
         });
 
@@ -222,24 +222,102 @@ if (Meteor.isServer) {
         });
 
         UserScores.insert({
+            userID: brian,
+            gameID: bang,
+            createdAt: new Date(),
+            scores: {
+                Unknown: 3
+            },
+            losses: 1
+        });
+        UserScores.insert({
+            userID: roger,
+            gameID: bang,
+            createdAt: new Date(),
+            scores: {
+                Unknown: 6
+            },
+            losses: 11
+        });
+        UserScores.insert({
+            userID: jamie,
+            gameID: bang,
+            createdAt: new Date(),
+            scores: {
+                Unknown:11
+            },
+            losses: 7
+        });
+        UserScores.insert({
+            userID: aaron,
+            gameID: bang,
+            createdAt: new Date(),
+            scores: {
+                Unknown: 6
+            },
+            losses: 9
+        });
+        UserScores.insert({
             userID: mike,
             gameID: bang,
             createdAt: new Date(),
             scores: {
-                Saviors: 2,
-                Survivors: 1
+                Unknown: 2
             },
-            losses: 48
+            losses: 13
         });
         UserScores.insert({
-            userID: mike,
-            gameID: monopoly,
+            userID: alex,
+            gameID: bang,
             createdAt: new Date(),
             scores: {
-                Horse: 3,
-                Thimble: 2
             },
-            losses: 3
+            losses: 4
+        });
+        UserScores.insert({
+            userID: warren,
+            gameID: bang,
+            createdAt: new Date(),
+            scores: {
+                Unknown: 3
+            },
+            losses: 9
+        });
+        UserScores.insert({
+            userID: serge,
+            gameID: bang,
+            createdAt: new Date(),
+            scores: {
+                Unknown: 8
+            },
+            losses: 5
+        });
+        UserScores.insert({
+            userID: dana,
+            gameID: bang,
+            createdAt: new Date(),
+            scores: {
+                Unknown: 3
+            },
+            losses: 9
+        });
+        UserScores.insert({
+            userID: krissy,
+            gameID: bang,
+            createdAt: new Date(),
+            scores: {
+                Unknown: 1
+            },
+            losses: 1
+        });
+        UserScores.insert({
+            userID: oscar,
+            gameID: bang,
+            createdAt: new Date(),
+            scores: {
+                Unknown: 2
+            },
+            losses: 2
         });
     }
 }
