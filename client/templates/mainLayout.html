@@ -16,13 +16,12 @@
         {{/if}}
 
         {{#if currentUser}}
-        <a class="item">
+        <a href="/teams" class="item">
             <i class="users icon"></i>
-            My Team
+            My Teams
         </a>
-        {{/if}}
 
-        <a class="item">
+        <a href="/games" class="item">
             <i class="game icon"></i>
             My Games
         </a>
@@ -31,17 +30,16 @@
             Log New Game
         </a>
 
-        {{#if currentUser}}
-            <a class="item">
-                <i class="options icon"></i>
-                Settings
-            </a>
-            {{> atNavButton}}
+        <a class="item">
+            <i class="options icon"></i>
+            Settings
+        </a>
+        {{> atNavButton}}
         {{/if}}
 
     </div>
 
-    <div class="pusher">
+    <div class="pusher mainContent container">
         {{> yield "mainContent"}}
     </div>
 

@@ -1,37 +1,33 @@
 
 <template name="chooseTeamGame">
-    <container id="chooseTeamContainer">
-        <br><br><br><br><br><br>
-        <form class="chooseTeamGameForm">
-            <div class="ui form">
-                <div class="field">
-                    <label >Choose a Team</label>
-                    <select name="team" class="ui dropdown">
-                        {{#each teams}}
-                            <option value="{{_id}}">{{name}}</option>
-                            <br>
-                        {{/each}}
-                    </select>
-                </div>
-                <br><br>
-                <div class="field">
-                    <label>Choose a Game</label>
-                    <select name="game" class="ui dropdown">
-                    {{#each games}}
+    <form class="chooseTeamGameForm">
+        <div class="ui form">
+            <div class="field">
+                <label >Choose a Team</label>
+                <select name="team" class="ui dropdown">
+                    {{#each teams}}
                         <option value="{{_id}}">{{name}}</option>
                         <br>
                     {{/each}}
-                    </select>
-                </div>
+                </select>
             </div>
             <br><br>
-            <button class="ui button" type="submit">Submit</button>
-        </form>
-    </container>
+            <div class="field">
+                <label>Choose a Game</label>
+                <select name="game" class="ui dropdown">
+                {{#each games}}
+                    <option value="{{_id}}">{{name}}</option>
+                    <br>
+                {{/each}}
+                </select>
+            </div>
+        </div>
+        <br><br>
+        <button class="ui button" type="submit">Submit</button>
+    </form>
 </template>
 
 <template name="newScore">
-    <br><br><br>
     <form class="ui form submitNewGame">
         <h3><span>{{name}}</span></h3>
         <input type="hidden" id="teamName" name="team" value="{{getUrlVars 'team'}}">

@@ -4,7 +4,10 @@
   right: 10px;
   z-index: 100;
   font-size: 30px;
-  color: black;
+}
+
+.mainContent {
+  padding: 50px 5px 0px 5px;
 }
 
 .title {
@@ -20,6 +23,10 @@
 
 .chooseTeamGameForm {
   margin: 10px;
+}
+
+a {
+  color: black;
 }
 
 a:hover {

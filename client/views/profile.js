@@ -28,7 +28,6 @@ Template.gameAccordion.helpers({
             obj.value = scores[key];
             arr.push(obj);
         }
-        console.log(arr);
         return arr;
-    },
+    }
 });

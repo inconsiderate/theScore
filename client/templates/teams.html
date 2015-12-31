@@ -1,0 +1,32 @@
+<template name="teams">
+    <h2>My Teams</h2>
+    <div class="ui column grid">
+        <div class="column">
+            {{#each teams}}
+            <div class="ui fluid card">
+                <div class="content">
+                    <img class="right floated mini ui image" src="/images/elliot.jpg">
+                    <div class="header">
+                        {{name}}
+                    </div>
+                    <div class="meta">
+                        Members: {{members.length}}
+                    </div>
+                    <div class="description">
+                        {{description}}
+                    </div>
+                </div>
+                <div class="extra content">
+                    <button class="fluid ui basic green button">Team Details</button>
+                    <br>
+                    <button class="fluid ui basic red button">Record Game</button>
+                </div>
+            </div>
+            {{/each}}
+        </div>
+    </div>
+</template>
+
+
+
+

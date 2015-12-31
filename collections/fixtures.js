@@ -9,7 +9,7 @@ if (Meteor.isServer) {
             createdAt: new Date(),
             likes: Math.floor((Math.random() * 100) + 1)
         });
-        var dnd = Teams.insert({
+        var pinball = Teams.insert({
             name: 'Pinball Wizards',
             description: 'My monthly pinball team.',
             createdAt: new Date(),
@@ -28,8 +28,7 @@ if (Meteor.isServer) {
             password: 'password',
             profile: {
                 username: 'mike',
-                bio: "After climbing mountains and catching international terrorists, I like to relax in the evenings with a cold glass of milk.",
-                teams: [kiwi, dnd, pokerTeam]
+                bio: "After climbing mountains and catching international terrorists, I like to relax in the evenings with a cold glass of milk."
             }
         });
         var serge = Accounts.createUser({
@@ -38,8 +37,7 @@ if (Meteor.isServer) {
             password: 'password',
             profile: {
                 username: 'serge',
-                bio: "a pretty cool dude",
-                teams: [kiwi]
+                bio: "a pretty cool dude"
             }
         });
         var jamie = Accounts.createUser({
@@ -48,8 +46,7 @@ if (Meteor.isServer) {
             password: 'password',
             profile: {
                 username: 'jamie',
-                bio: '22, virile, and the best ever.',
-                teams: [kiwi]
+                bio: '22, virile, and the best ever.'
             }
         });
         var roger = Accounts.createUser({
@@ -58,8 +55,7 @@ if (Meteor.isServer) {
             password: 'password',
             profile: {
                 username: 'roger',
-                bio: 'This is my bio! Whatever.',
-                teams: [kiwi]
+                bio: 'This is my bio! Whatever.'
             }
         });
         var krissy = Accounts.createUser({
@@ -68,8 +64,7 @@ if (Meteor.isServer) {
             password: 'password',
             profile: {
                 username: 'krissy',
-                bio: 'I like cheese.',
-                teams: [kiwi]
+                bio: 'I like cheese.'
             }
         });
         var devon = Accounts.createUser({
@@ -78,8 +73,7 @@ if (Meteor.isServer) {
             password: 'password',
             profile: {
                 username: 'devon',
-                bio: 'Pootea is the best tea!',
-                teams: [kiwi]
+                bio: 'Pootea is the best tea!'
             }
         });
         var alex = Accounts.createUser({
@@ -88,8 +82,7 @@ if (Meteor.isServer) {
             password: 'password',
             profile: {
                 username: 'alex',
-                bio: 'lolwut where am I',
-                teams: [kiwi]
+                bio: 'lolwut where am I'
             }
         });
 
@@ -99,8 +92,7 @@ if (Meteor.isServer) {
             password: 'password',
             profile: {
                 username: 'dana',
-                bio: 'lolwut where am I',
-                teams: [kiwi]
+                bio: 'lolwut where am I'
             }
         });
 
@@ -110,8 +102,7 @@ if (Meteor.isServer) {
             password: 'password',
             profile: {
                 username: 'brian',
-                bio: 'lolwut where am I',
-                teams: [kiwi]
+                bio: 'lolwut where am I'
             }
         });
         var aaron = Accounts.createUser({
@@ -120,8 +111,7 @@ if (Meteor.isServer) {
             password: 'password',
             profile: {
                 username: 'aaron',
-                bio: "I always lie about what faction I am. I pretty much always play the Loner, but I'll swear that I'm a survivor even when i'm shooting you in the back.",
-                teams: [kiwi]
+                bio: "I always lie about what faction I am. I pretty much always play the Loner, but I'll swear that I'm a survivor even when i'm shooting you in the back."
             }
         });
         var warren = Accounts.createUser({
@@ -130,8 +120,7 @@ if (Meteor.isServer) {
             password: 'password',
             profile: {
                 username: 'warren',
-                bio: 'lolwut where am I',
-                teams: [kiwi]
+                bio: 'lolwut where am I'
             }
         });
         var oscar = Accounts.createUser({
@@ -140,37 +129,21 @@ if (Meteor.isServer) {
             password: 'password',
             profile: {
                 username: 'oscar',
-                bio: 'lolwut where am I',
-                teams: [kiwi]
+                bio: 'lolwut where am I'
             }
         });
+        var allUsers = [ aaron, krissy, mike, serge, dana, brian, jamie, oscar, warren, alex, roger, devon ];
+        var halfUsers = [ krissy, mike, serge, jamie, oscar, warren ];
         Teams.update(kiwi, {
             $push: {
-                members: mike
+                    members: {$each: allUsers}
             }
         });
-        Teams.update(kiwi, {
+        Teams.update(pinball, {
             $push: {
-                members: aaron
+                members: {$each: halfUsers}
             }
         });
-
-        Teams.update(kiwi, {
-            $push: {
-                members: krissy
-            }
-        });
-        Teams.update(dnd, {
-            $push: {
-                members: mike
-            }
-        });
-        Teams.update(kiwi, {
-            $push: {
-                members: serge
-            }
-        });
-
         var bang = Games.insert({
             name: 'Bang! The Dice Game - Walking Dead Edition',
             description: 'Do you like zombies and rolling dice? This is the game for you!',
@@ -202,25 +175,9 @@ if (Meteor.isServer) {
         });
         Meteor.users.update(mike, {
             $push: {
-                "profile.myGames": bang
+                "profile.myGames": {$each: [bang, pandemic, monopoly, poker]}
             }
         });
-        Meteor.users.update(mike, {
-            $push: {
-                "profile.myGames": pandemic
-            }
-        });
-        Meteor.users.update(mike, {
-            $push: {
-                "profile.myGames": monopoly
-            }
-        });
-        Meteor.users.update(mike, {
-            $push: {
-                "profile.myGames": poker
-            }
-        });
-
         UserScores.insert({
             userID: brian,
             gameID: bang,
