@@ -10,6 +10,6 @@ Meteor.publish('games', function() {
     return Games.find();
 });
 
-Meteor.publish('userScores', function() {
-    return UserScores.find();
+Meteor.publish('TeamScores', function() {
+    return TeamScores.find();
 });

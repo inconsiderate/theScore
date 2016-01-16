@@ -1,6 +1,6 @@
 Template.profile.helpers({
-    userScores: function(){
-        return UserScores.find({ userID: Meteor.userId() });
+    TeamScores: function(){
+        return TeamScores.find({ userID: Meteor.userId() });
     }
 });
 

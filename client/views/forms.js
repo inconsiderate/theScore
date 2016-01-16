@@ -18,7 +18,7 @@ Template.newScore.events({
             }
         });
         console.log(results);
-        Meteor.call("insertUserScore", results, function(error, success){
+        Meteor.call("insertTeamScore", results, function(error, success){
             if(error){
                 alert(error);
                 return;
@@ -30,7 +30,9 @@ Template.newScore.events({
 
 Template.newScore.helpers({
     teamMembers: function() {
-        var values = function() {
+
+        var getTeamMembers = new function() {
+            var teamName;
             var vars = [], hash;
             var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
             for (var i = 0; i < hashes.length; i++) {
@@ -38,9 +40,11 @@ Template.newScore.helpers({
                 vars.push(hash[0]);
                 vars[hash[0]] = hash[1];
             }
-            return vars;
+            return Teams.findOne({_id: vars.team});
         };
-        return Meteor.users.find({'profile.teams': values()["team"]});
+        var nameIds = getTeamMembers();
+        console.log(nameIds);
+        return Meteor.users.find({_id: { $in: nameIds } });
     }
 });
 

@@ -17,9 +17,8 @@
                     </div>
                 </div>
                 <div class="extra content">
-                    <button class="fluid ui basic green button">Team Details</button>
-                    <br>
-                    <button class="fluid ui basic red button">Record Game</button>
+                    <button value="{{_id}}" class="teamDetailsButton fluid ui basic green button">Team Details</button>
+                    <!--<button class="recordNewGameButton fluid ui basic red button">Record Game</button>-->
                 </div>
             </div>
             {{/each}}
@@ -28,5 +27,53 @@
 </template>
 
 
+<template name="teamProfile">
+    <h2>{{name}}</h2>
+    <br>
+    <div class="ui mini two statistics">
+        <div class="statistic">
+            <div class="value">
+                <i class="heart icon"></i> {{likes}}
+            </div>
+            <div class="label">
+                Likes
+            </div>
+        </div>
+        <div class="statistic">
+            <div class="value">
+                <i class="users icon"></i> {{members.length}}
+            </div>
+            <div class="label">
+                Team Members
+            </div>
+        </div>
+    </div>
 
+    <div class="ui form">
+        <div class="field">
+            <label>Choose a Game</label>
+            <select name="game" class="ui dropdown">
+                {{#each games}}
+                    <option value="{{_id}}">{{name}}</option>
+                    <br>
+                {{/each}}
+            </select>
+        </div>
+    </div>
+
+
+
+    <br><br>
+    <div class="ui styled fluid accordion">
+    {{#each teammate}}
+        <div class="title">
+            <i class="dropdown icon"></i>
+            {{profile.username}}
+        </div>
+        <div class="content">
+            <p>This is some score content for this team member.</p>
+        </div>
+    {{/each}}
+    </div>
+</template>
 

@@ -1,8 +1,8 @@
 Meteor.methods({
 
-    insertUserScore: function (results) {
+    insertTeamScore: function (results) {
         if (Object.keys(results).length > 3) {
-        //if (results.length > 3) {
+            var gameUpdate = TeamScores.findOne({teamID: results.team, gameID: results.game});
             for (var i in results) {
                 if (i == 'game' || i == 'team' || i == 'winner') {
                     continue;
@@ -10,29 +10,28 @@ Meteor.methods({
                 else {
                     var incFaction = {};
                     incFaction[results[i]] = 1;
-                    var gameUpdate = UserScores.findOne({userID: i, gameID: results['game']});
                     if (gameUpdate) {
                         if (results.winner == results[i]) {
-                            UserScores.update(gameUpdate, { $inc: incFaction });
+                            TeamScores.update(gameUpdate, { $inc: incFaction });
                         } else {
-                            UserScores.update(gameUpdate, { $inc: {losses: 1} });
+                            TeamScores.update(gameUpdate, { $inc: {losses: 1} });
                         }
                     } else {
                         if (results.winner == results[i]) {
-                            var gameInsert = UserScores.insert({
+                            var gameInsert = TeamScores.insert({
                                 userID: i,
                                 gameID: results['game'],
                                 createdAt: new Date()
                             });
-                            UserScores.update(gameInsert, { $inc: incFaction });
+                            TeamScores.update(gameInsert, { $inc: incFaction });
                         } else {
-                            var gameInsert = UserScores.insert({
+                            var gameInsert = TeamScores.insert({
                                 userID: i,
                                 gameID: results['game'],
                                 faction: results[i],
                                 createdAt: new Date()
                             });
-                            UserScores.update(gameInsert, { $inc: {losses: 1} });
+                            TeamScores.update(gameInsert, { $inc: {losses: 1} });
                         }
                     }
                 }

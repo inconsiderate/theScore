@@ -1,4 +1,4 @@
 
 Teams = new Meteor.Collection("teams");
-UserScores = new Meteor.Collection("userScores");
+TeamScores = new Meteor.Collection("TeamScores");
 Games = new Mongo.Collection("games");

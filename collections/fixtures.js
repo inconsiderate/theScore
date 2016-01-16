@@ -4,8 +4,8 @@ if (Meteor.isServer) {
         Teams.remove({});
 
         var kiwi = Teams.insert({
-            name: 'Kiwi Collection',
-            description: 'This is the best team ever.',
+            name: 'Team Kiwi',
+            description: 'This is the best team ever. Super green. The best players on Earth. Amazing teamwork. Stellar communication. Advanced tactics. High alcohol tolerance.',
             createdAt: new Date(),
             likes: Math.floor((Math.random() * 100) + 1)
         });
@@ -132,8 +132,10 @@ if (Meteor.isServer) {
                 bio: 'lolwut where am I'
             }
         });
+
         var allUsers = [ aaron, krissy, mike, serge, dana, brian, jamie, oscar, warren, alex, roger, devon ];
         var halfUsers = [ krissy, mike, serge, jamie, oscar, warren ];
+
         Teams.update(kiwi, {
             $push: {
                     members: {$each: allUsers}
@@ -178,103 +180,35 @@ if (Meteor.isServer) {
                 "profile.myGames": {$each: [bang, pandemic, monopoly, poker]}
             }
         });
-        UserScores.insert({
-            userID: brian,
+        TeamScores.insert({
             gameID: bang,
+            teamID: kiwi,
             createdAt: new Date(),
             scores: {
-                Unknown: 3
-            },
-            losses: 1
+                brian: {
+                    wins: {
+                        Survivor: 1,
+                        Hilltop: 2
+                    },
+                    losses: 7
+                },
+                roger: {
+                    wins: {
+                        Savior: 9,
+                        Hilltop: 1,
+                        Kingdom: 2
+                    },
+                    losses: 12
+                },
+                mike: {
+                    wins: {
+                        Survivor: 3,
+                        Savior: 8,
+                        Hilltop: 1
+                    },
+                    losses: 3
+                }
+            }
         });
-        UserScores.insert({
-            userID: roger,
-            gameID: bang,
-            createdAt: new Date(),
-            scores: {
-                Unknown: 6
-            },
-            losses: 11
-        });
-        UserScores.insert({
-            userID: jamie,
-            gameID: bang,
-            createdAt: new Date(),
-            scores: {
-                Unknown:11
-            },
-            losses: 7
-        });
-        UserScores.insert({
-            userID: aaron,
-            gameID: bang,
-            createdAt: new Date(),
-            scores: {
-                Unknown: 6
-            },
-            losses: 9
-        });
-        UserScores.insert({
-            userID: mike,
-            gameID: bang,
-            createdAt: new Date(),
-            scores: {
-                Unknown: 2
-            },
-            losses: 13
-        });
-        UserScores.insert({
-            userID: alex,
-            gameID: bang,
-            createdAt: new Date(),
-            scores: {
-            },
-            losses: 4
-        });
-        UserScores.insert({
-            userID: warren,
-            gameID: bang,
-            createdAt: new Date(),
-            scores: {
-                Unknown: 3
-            },
-            losses: 9
-        });
-        UserScores.insert({
-            userID: serge,
-            gameID: bang,
-            createdAt: new Date(),
-            scores: {
-                Unknown: 8
-            },
-            losses: 5
-        });
-        UserScores.insert({
-            userID: dana,
-            gameID: bang,
-            createdAt: new Date(),
-            scores: {
-                Unknown: 3
-            },
-            losses: 9
-        });
-        UserScores.insert({
-            userID: krissy,
-            gameID: bang,
-            createdAt: new Date(),
-            scores: {
-                Unknown: 1
-            },
-            losses: 1
-        });
-        UserScores.insert({
-            userID: oscar,
-            gameID: bang,
-            createdAt: new Date(),
-            scores: {
-                Unknown: 2
-            },
-            losses: 2
-        });
-    }
+   }
 }
