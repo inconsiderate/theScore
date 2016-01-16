@@ -29,6 +29,8 @@
 
 <template name="newScore">
     <form class="ui form submitNewGame">
+
+        {{#with game}}
         <h3><span>{{name}}</span></h3>
         <input type="hidden" id="teamName" name="team" value="{{getUrlVars 'team'}}">
         <br>
@@ -43,6 +45,7 @@
                 </select>
             </div>
         </div>
+        {{/with}}
         <br>
         <div class="inline fields">
             {{#each teamMembers}}
@@ -56,18 +59,18 @@
 <template name="teamMember">
     <div class="grouped fields">
     <label>{{profile.username}}</label>
-        {{#with ..}}
+        {{#with game}}
             {{#each faction}}
             <div class="field">
                 <div class="ui radio checkbox">
-                    <input type="radio" name="{{../../_id}}" value="{{this}}">
+                    <input type="radio" name="{{../_id}}" value="{{this}}">
                     <label>{{this}}</label>
                 </div>
             </div>
             {{/each}}
             <div class="field">
                 <div class="ui radio checkbox">
-                    <input type="radio" name="{{../_id}}" value="absent" checked="checked">
+                    <input type="radio" name="{{_id}}" value="absent" checked="checked">
                     <label>Didn't Play</label>
                 </div>
             </div>
