@@ -4,6 +4,7 @@ Meteor.startup(function () {
 
 Template.newScore.events({
     "submit .submitNewGame": function (event) {
+        console.log(this);
         event.preventDefault();
         var results = {};
         results.winner = event.target.winner.value;
@@ -25,6 +26,9 @@ Template.newScore.events({
             }
             Router.go('/profile/'+Meteor.userId());
         });
+    },
+    "click #reload-button": function (event) {
+        location.reload();
     }
 });
 
@@ -32,21 +36,6 @@ Template.newScore.helpers({
     teamMembers: function() {
         var members = this.members;
         return Meteor.users.find({ _id: {$in: members } });
-    },
-    game: function() {
-        var url = window.location.href;
-        var param = /game=([^&]+)/.exec(url)[1];
-        var game = Games.findOne({_id: param});
-        return game;
-    }
-});
-
-Template.teamMember.helpers({
-    game: function() {
-        var url = window.location.href;
-        var param = /game=([^&]+)/.exec(url)[1];
-        var game = Games.findOne({_id: param});
-        return game;
     }
 });
 
@@ -67,3 +56,4 @@ Template.chooseTeamGame.events({
         Router.go('/newScore?team='+team+'&game='+game);
     }
 });
+

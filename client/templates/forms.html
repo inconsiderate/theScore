@@ -30,7 +30,7 @@
 <template name="newScore">
     <form class="ui form submitNewGame">
 
-        {{#with game}}
+        {{#with gameUrlParam 1}}
         <h3><span>{{name}}</span></h3>
         <input type="hidden" id="teamName" name="team" value="{{getUrlVars 'team'}}">
         <br>
@@ -54,26 +54,28 @@
         </div>
         <button class="ui button" type="submit">Submit</button>
     </form>
+<br />
+    <div id="reload-button" class="ui button">Reload Page</div>
 </template>
 
 <template name="teamMember">
     <div class="grouped fields">
     <label>{{profile.username}}</label>
-        {{#with game}}
-            {{#each faction}}
-            <div class="field">
-                <div class="ui radio checkbox">
-                    <input type="radio" name="{{../_id}}" value="{{this}}">
-                    <label>{{this}}</label>
-                </div>
+    {{#with gameUrlParam 1}}
+        {{#each faction}}
+        <div class="field">
+            <div class="ui radio checkbox">
+                <input type="radio" name="{{../../_id}}" value="{{this}}" />
+                <label>{{this}}</label>
             </div>
-            {{/each}}
-            <div class="field">
-                <div class="ui radio checkbox">
-                    <input type="radio" name="{{_id}}" value="absent" checked="checked">
-                    <label>Didn't Play</label>
-                </div>
+        </div>
+        {{/each}}
+        <div class="field">
+            <div class="ui radio checkbox">
+                <input type="radio" name="{{../_id}}" value="absent" checked />
+                <label>Didn't Play</label>
             </div>
-        {{/with}}
+        </div>
+    {{/with}}
     </div>
 </template>

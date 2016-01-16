@@ -13,5 +13,12 @@ if (Meteor.isClient) {
     Template.registerHelper('gameTitle', function (context) {
         var u = Games.findOne({_id: context});
         return u.name;
+    });
+
+    Template.registerHelper('gameUrlParam', function (context) {
+        var url = window.location.href;
+        var param = /game=([^&]+)/.exec(url)[context];
+        return Games.findOne({_id: param});
     })
+
 }
