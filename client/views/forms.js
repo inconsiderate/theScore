@@ -30,21 +30,23 @@ Template.newScore.events({
 
 Template.newScore.helpers({
     teamMembers: function() {
+        var members = this.members;
+        return Meteor.users.find({ _id: {$in: members } });
+    },
+    game: function() {
+        var url = window.location.href;
+        var param = /game=([^&]+)/.exec(url)[1];
+        var game = Games.findOne({_id: param});
+        return game;
+    }
+});
 
-        var getTeamMembers = new function() {
-            var teamName;
-            var vars = [], hash;
-            var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
-            for (var i = 0; i < hashes.length; i++) {
-                hash = hashes[i].split('=');
-                vars.push(hash[0]);
-                vars[hash[0]] = hash[1];
-            }
-            return Teams.findOne({_id: vars.team});
-        };
-        var nameIds = getTeamMembers();
-        console.log(nameIds);
-        return Meteor.users.find({_id: { $in: nameIds } });
+Template.teamMember.helpers({
+    game: function() {
+        var url = window.location.href;
+        var param = /game=([^&]+)/.exec(url)[1];
+        var game = Games.findOne({_id: param});
+        return game;
     }
 });
 
