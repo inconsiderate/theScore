@@ -1,38 +1,30 @@
 Meteor.methods({
 
     insertTeamScore: function (results) {
-        if (Object.keys(results).length > 3) {
+        if (Object.keys(results).length > 4 && results.winner) {
             var gameUpdate = TeamScores.findOne({teamID: results.team, gameID: results.game});
+            if (!gameUpdate) {
+                gameUpdate = TeamScores.insert({teamID: results.team, gameID: results.game});
+            }
             for (var i in results) {
+                var query = {};
+                var playerString = "";
                 if (i == 'game' || i == 'team' || i == 'winner') {
                     continue;
                 }
                 else {
-                    var incFaction = {};
-                    incFaction[results[i]] = 1;
-                    if (gameUpdate) {
-                        if (results.winner == results[i]) {
-                            TeamScores.update(gameUpdate, { $inc: incFaction });
-                        } else {
-                            TeamScores.update(gameUpdate, { $inc: {losses: 1} });
-                        }
+                    if (results.winner == results[i]) {
+                        playerString = i + "." + results[i];
+                        query[playerString] = 1;
+                        console.log('win....');
+                        console.log(query);
+                        TeamScores.update(gameUpdate, { $inc: query });
                     } else {
-                        if (results.winner == results[i]) {
-                            var gameInsert = TeamScores.insert({
-                                userID: i,
-                                gameID: results['game'],
-                                createdAt: new Date()
-                            });
-                            TeamScores.update(gameInsert, { $inc: incFaction });
-                        } else {
-                            var gameInsert = TeamScores.insert({
-                                userID: i,
-                                gameID: results['game'],
-                                faction: results[i],
-                                createdAt: new Date()
-                            });
-                            TeamScores.update(gameInsert, { $inc: {losses: 1} });
-                        }
+                        playerString = i + ".losses";
+                        query[playerString] = 1;
+                        console.log('loss....');
+                        console.log(query);
+                        TeamScores.update(gameUpdate, { $inc: query });
                     }
                 }
             }

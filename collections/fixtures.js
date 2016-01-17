@@ -28,6 +28,7 @@ if (Meteor.isServer) {
             password: 'password',
             profile: {
                 username: 'mike',
+                teams: [kiwi, pinball],
                 bio: "After climbing mountains and catching international terrorists, I like to relax in the evenings with a cold glass of milk."
             }
         });
@@ -37,6 +38,7 @@ if (Meteor.isServer) {
             password: 'password',
             profile: {
                 username: 'serge',
+                teams: [kiwi, pinball],
                 bio: "a pretty cool dude"
             }
         });
@@ -46,6 +48,7 @@ if (Meteor.isServer) {
             password: 'password',
             profile: {
                 username: 'jamie',
+                teams: [kiwi, pinball],
                 bio: '22, virile, and the best ever.'
             }
         });
@@ -55,6 +58,7 @@ if (Meteor.isServer) {
             password: 'password',
             profile: {
                 username: 'roger',
+                teams: [kiwi],
                 bio: 'This is my bio! Whatever.'
             }
         });
@@ -64,6 +68,7 @@ if (Meteor.isServer) {
             password: 'password',
             profile: {
                 username: 'krissy',
+                teams: [kiwi, pinball],
                 bio: 'I like cheese.'
             }
         });
@@ -73,6 +78,7 @@ if (Meteor.isServer) {
             password: 'password',
             profile: {
                 username: 'devon',
+                teams: [kiwi],
                 bio: 'Pootea is the best tea!'
             }
         });
@@ -82,6 +88,7 @@ if (Meteor.isServer) {
             password: 'password',
             profile: {
                 username: 'alex',
+                teams: [kiwi],
                 bio: 'lolwut where am I'
             }
         });
@@ -92,6 +99,7 @@ if (Meteor.isServer) {
             password: 'password',
             profile: {
                 username: 'dana',
+                teams: [kiwi],
                 bio: 'lolwut where am I'
             }
         });
@@ -102,6 +110,7 @@ if (Meteor.isServer) {
             password: 'password',
             profile: {
                 username: 'brian',
+                teams: [kiwi],
                 bio: 'lolwut where am I'
             }
         });
@@ -111,6 +120,7 @@ if (Meteor.isServer) {
             password: 'password',
             profile: {
                 username: 'aaron',
+                teams: [kiwi],
                 bio: "I always lie about what faction I am. I pretty much always play the Loner, but I'll swear that I'm a survivor even when i'm shooting you in the back."
             }
         });
@@ -120,6 +130,7 @@ if (Meteor.isServer) {
             password: 'password',
             profile: {
                 username: 'warren',
+                teams: [kiwi, pinball],
                 bio: 'lolwut where am I'
             }
         });
@@ -129,6 +140,7 @@ if (Meteor.isServer) {
             password: 'password',
             profile: {
                 username: 'oscar',
+                teams: [kiwi, pinball],
                 bio: 'lolwut where am I'
             }
         });
@@ -178,36 +190,6 @@ if (Meteor.isServer) {
         Meteor.users.update(mike, {
             $push: {
                 "profile.myGames": {$each: [bang, pandemic, monopoly, poker]}
-            }
-        });
-        TeamScores.insert({
-            gameID: bang,
-            teamID: kiwi,
-            createdAt: new Date(),
-            scores: {
-                brian: {
-                    wins: {
-                        Survivor: 1,
-                        Hilltop: 2
-                    },
-                    losses: 7
-                },
-                roger: {
-                    wins: {
-                        Savior: 9,
-                        Hilltop: 1,
-                        Kingdom: 2
-                    },
-                    losses: 12
-                },
-                mike: {
-                    wins: {
-                        Survivor: 3,
-                        Savior: 8,
-                        Hilltop: 1
-                    },
-                    losses: 3
-                }
             }
         });
    }

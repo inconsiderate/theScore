@@ -7,8 +7,8 @@ Template.newScore.events({
         event.preventDefault();
         var results = {};
         results.winner = event.target.winner.value;
-        results.game = this._id;
-        results.team = event.target.team.value;
+        results.game = event.target.game.value;
+        results.team = this._id;
         var team = Teams.findOne({_id: results.team});
         var teammates = team.members;
         teammates.forEach(function(row) {
