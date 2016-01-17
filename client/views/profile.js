@@ -1,6 +1,6 @@
 Template.profile.helpers({
     TeamScores: function(){
-        return TeamScores.find({ userID: this._id });
+        return TeamScores.find({ teamID: {$in: this.profile.teams} });
     }
 });
 

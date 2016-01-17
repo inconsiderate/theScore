@@ -13,3 +13,10 @@ Meteor.publish('games', function() {
 Meteor.publish('TeamScores', function() {
     return TeamScores.find();
 });
+
+Meteor.publish('myTeams', function() {
+    if(this.userId) {
+        var user = Meteor.users.findOne(this.userId);
+        return Teams.find({ _id: {$in: user.profile.teams} });
+    }
+});
