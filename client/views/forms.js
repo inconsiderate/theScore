@@ -4,21 +4,19 @@ Meteor.startup(function () {
 
 Template.newScore.events({
     "submit .submitNewGame": function (event) {
-        console.log(this);
         event.preventDefault();
         var results = {};
         results.winner = event.target.winner.value;
         results.game = this._id;
         results.team = event.target.team.value;
-        var teammates = Meteor.users.find({'profile.teams': results.team});
+        var team = Teams.findOne({_id: results.team});
+        var teammates = team.members;
         teammates.forEach(function(row) {
-            var id = row._id;
-            var value = event.target[id].value;
+            var value = event.target[row].value;
             if (value != 'absent') {
-                results[id] = value;
+                results[row] = value;
             }
         });
-        console.log(results);
         Meteor.call("insertTeamScore", results, function(error, success){
             if(error){
                 alert(error);
