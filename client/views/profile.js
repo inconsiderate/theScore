@@ -6,23 +6,36 @@ Template.profile.helpers({
 
 Template.gameAccordion.helpers({
     totalWins: function() {
-        var sum = 0, scores = this.scores;
+        var userId = Meteor.userId();
+        var sum = 0, scores = this[userId];
         for (var key in scores) {
+            if (key == 'losses') {
+                continue;
+            }
             sum += scores[key];
         }
         return sum;
     },
     totalGames: function() {
-        var sum = 0, scores = this.scores;
+        var userId = Meteor.userId();
+        var sum = 0, scores = this[userId];
         for (var key in scores) {
             sum += scores[key];
         }
-        sum += this.losses;
         return sum;
     },
+    totalLosses: function() {
+        var userId = Meteor.userId();
+        var scores = this[userId];
+        return scores.losses;
+    },
     scoresArray: function () {
-        var arr = [], scores = this.scores;
+        var userId = Meteor.userId(),
+        arr = [], scores = this[userId];
         for (var key in scores) {
+            if (key == 'losses') {
+                continue;
+            }
             var obj = {};
             obj.key = key;
             obj.value = scores[key];
