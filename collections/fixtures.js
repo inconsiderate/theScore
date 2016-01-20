@@ -3,16 +3,48 @@ if (Meteor.isServer) {
     if (Teams.find().count() < 3) {
         Teams.remove({});
 
+        var bang = Games.insert({
+            name: 'Bang! The Dice Game - Walking Dead Edition',
+            description: 'Do you like zombies and rolling dice? This is the game for you!',
+            createdAt: new Date(),
+            faction: ['Savior', 'Survivor', 'Hilltop', 'Kingdom'],
+            likes: Math.floor((Math.random() * 100) + 1)
+        });
+
+        var pandemic = Games.insert({
+            name: 'Pandemic',
+            description: 'Diseases?! Omg the world is ending!',
+            createdAt: new Date(),
+            likes: Math.floor((Math.random() * 100) + 1)
+        });
+
+        var monopoly = Games.insert({
+            name: 'Monopoly',
+            description: 'How big is your wad?',
+            createdAt: new Date(),
+            faction: ['Horse', 'Thimble', 'Shoe', 'Racecar', 'Wheelbarrel'],
+            likes: Math.floor((Math.random() * 100) + 1)
+        });
+
+        var poker = Games.insert({
+            name: 'Poker',
+            description: 'I hope you brought a lot of cash.',
+            createdAt: new Date(),
+            likes: Math.floor((Math.random() * 100) + 1)
+        });
+
         var kiwi = Teams.insert({
             name: 'Team Kiwi',
             description: 'This is the best team ever. Super green. The best players on Earth. Amazing teamwork. Stellar communication. Advanced tactics. High alcohol tolerance.',
             createdAt: new Date(),
+            games: [bang, pandemic, monopoly],
             likes: Math.floor((Math.random() * 100) + 1)
         });
         var pinball = Teams.insert({
             name: 'Pinball Wizards',
             description: 'My monthly pinball team.',
             createdAt: new Date(),
+            games: [poker],
             likes: Math.floor((Math.random() * 100) + 1)
         });
         var pokerTeam = Teams.insert({
@@ -29,6 +61,7 @@ if (Meteor.isServer) {
             profile: {
                 username: 'mike',
                 teams: [kiwi, pinball],
+                games: [bang, pandemic, monopoly],
                 bio: "After climbing mountains and catching international terrorists, I like to relax in the evenings with a cold glass of milk."
             }
         });
@@ -157,35 +190,6 @@ if (Meteor.isServer) {
             $push: {
                 members: {$each: halfUsers}
             }
-        });
-        var bang = Games.insert({
-            name: 'Bang! The Dice Game - Walking Dead Edition',
-            description: 'Do you like zombies and rolling dice? This is the game for you!',
-            createdAt: new Date(),
-            faction: ['Savior', 'Survivor', 'Hilltop', 'Kingdom'],
-            likes: Math.floor((Math.random() * 100) + 1)
-        });
-
-        var pandemic = Games.insert({
-            name: 'Pandemic',
-            description: 'Diseases?! Omg the world is ending!',
-            createdAt: new Date(),
-            likes: Math.floor((Math.random() * 100) + 1)
-        });
-
-        var monopoly = Games.insert({
-            name: 'Monopoly',
-            description: 'How big is your wad?',
-            createdAt: new Date(),
-            faction: ['Horse', 'Thimble', 'Shoe', 'Racecar', 'Wheelbarrel'],
-            likes: Math.floor((Math.random() * 100) + 1)
-        });
-
-        var poker = Games.insert({
-            name: 'Poker',
-            description: 'I hope you brought a lot of cash.',
-            createdAt: new Date(),
-            likes: Math.floor((Math.random() * 100) + 1)
         });
         Meteor.users.update(mike, {
             $push: {
