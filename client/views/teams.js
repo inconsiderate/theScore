@@ -1,6 +1,11 @@
 Template.teams.helpers({
     myTeams: function() {
-        return Teams.find({ members: Meteor.userId() });
+        var teams = Teams.find({ members: Meteor.userId() });
+        if (teams.count() > 0) {
+            return teams;
+        } else {
+            return null;
+        }
     },
     otherTeams: function() {
         return Teams.find({members: {$not: Meteor.userId() }});
@@ -29,9 +34,8 @@ Template.teams.events({
     },
     "click .joinSelectedTeam": function(event) {
         var results = event.target.value;
-        console.log(event);
         if (results) {
-            Meteor.call("joinTeam", results, function (err, success) {
+            Meteor.call("joinTeam", results, function (error, success) {
                 if (error) {
                     alert(error);
                     return

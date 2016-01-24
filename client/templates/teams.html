@@ -5,6 +5,8 @@
     </div>
     <div class="ui column grid">
         <div class="column">
+            <div class="container">
+            {{#if myTeams}}
             {{#each myTeams}}
             <div class="ui fluid card">
                 <div class="content">
@@ -19,18 +21,26 @@
                         {{description}}
                     </div>
                 </div>
-                <div class="extra content">
-                    <button value="{{_id}}" class="teamDetailsRouteButton fluid ui basic green button">Team Details</button>
-                    <button class="leaveTeamButton fluid ui basic red button">Leave Team</button>
+                <div class="extra content two ui buttons">
+                    <button value="{{_id}}" class="teamDetailsRouteButton ui basic green button">Team Details</button>
+                    <button class="leaveTeamButton ui basic red button">Leave Team</button>
                 </div>
             </div>
             {{/each}}
+            {{ else }}
+                <div>You don't belong to any teams!</div>
+                <div>Create a new one, or join a team below.</div>
+            {{/if}}
+            </div>
+            <br><br>
 
+            <div class="ui clearing divider"></div>
             <div>
-                <h2>Other Popular Teams</h2>
+                <h2>Popular Teams</h2>
             </div>
 
-            {{#each otherTeams}}
+            <div class="container">
+                {{#each otherTeams}}
                 <div class="ui fluid card">
                     <div class="content">
                         <img class="right floated mini ui image" src="/images/elliot.jpg">
@@ -48,8 +58,8 @@
                         <button value="{{_id}}" class="joinSelectedTeam fluid ui basic blue button">Apply to Join!</button>
                     </div>
                 </div>
-            {{/each}}
-
+                {{/each}}
+            </div>
 
         </div>
     </div>
@@ -142,18 +152,11 @@
 <template name="newTeam">
     <div><h2>Create New Team</h2></div>
     <br /><br />
-
     <form class="ui form joinSelectedTeam">
         <div class="field">
-            <label>Available Teams</label>
-            <select name="joinTeamSelect" class="ui dropdown">
-                {{#each this}}
-                    <option value="{{_id}}">{{name}}</option>
-                    <br>
-                {{/each}}
-            </select>
+            Enter team name and details here.
         </div>
-        <button class="fluid ui basic green button">Join Team</button>
+        <button class="fluid ui basic green button">Create Team</button>
     </form>
 
 </template>

@@ -36,14 +36,24 @@ Meteor.methods({
         // add team to User.profile.teams array
         if (results) {
             var teamId = results;
-            var user = Meteor.user();
-            console.log(user);
-            //Teams.update(teamId, {members: user});
-            //Meteor.users.update({_id: user}, {
-            //    $push: {"profile.teams": teamId}
-            //});
+            var user = Meteor.user()._id;
+            Teams.update({_id: teamId}, {
+                $push: {members: user}
+            });
+            Meteor.users.update({_id: user}, {
+                $push: {"profile.teams": teamId}
+            });
         } else {
             throw new Meteor.Error(000, 'Error inserting new Team');
+        }
+    },
+
+    leaveTeam: function(results) {
+        if (results) {
+            // pull user from Team.members
+            // pull team from User.profile.teams
+        } else {
+            throw new Meteor.erro(000, 'No team specified');
         }
     }
 });
