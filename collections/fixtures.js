@@ -53,6 +53,12 @@ if (Meteor.isServer) {
             createdAt: new Date(),
             likes: Math.floor((Math.random() * 100) + 1)
         });
+        var dnd = Teams.insert({
+            name: 'Knights of Badassdom',
+            description: 'The ongoing adventure campaign of the Knights of Badassdom.',
+            createdAt: new Date(),
+            likes: Math.floor((Math.random() * 100) + 1)
+        });
 
         var mike = Accounts.createUser({
             email: 'mike@gmail.com',

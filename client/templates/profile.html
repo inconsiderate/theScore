@@ -62,3 +62,65 @@
         </div>
     </div>
 </template>
+
+<template name="editUserProfile">
+    <form class="edit-user-form">
+        <div class="center warning-block red-text">All information is OPTIONAL and may be displayed to other users!
+        </div>
+        <div class="row">
+            <div class="input-field col s12 m6">
+                <i class="material-icons prefix">person_pin</i>
+                <input id="user_name" type="text" class="validate" length="15" autofocus>
+                <label for="user_name">username</label>
+            </div>
+            <div class="input-field col s12 m6">
+                <i class="material-icons prefix">speaker_notes</i>
+                <input id="user_gender" type="text" class="validate" length="15">
+                <label for="user_gender">gender identity</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s12 m6">
+                <i class="material-icons prefix">person_pin</i>
+                <input id="user_age" type="number" class="validate">
+                <label for="user_age">age</label>
+            </div>
+            <div class="input-field col s12 m6">
+                <i class="material-icons prefix">speaker_notes</i>
+                <input id="user_relationship" type="text" class="validate">
+                <label for="user_relationship">relationship status?</label>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="switch col s12 m6">
+                <div>Receive messages from other users?</div>
+                <label>
+                    Off
+                    <input id="user_messages_toggle" type="checkbox">
+                    <span class="lever"></span>
+                    On
+                </label>
+            </div>
+            <div class="switch col s12 m6">
+                <div>Receive email notifications from us?</div>
+                <label>
+                    Off
+                    <input id="email_notifications_toggle" type="checkbox">
+                    <span class="lever"></span>
+                    On
+                </label>
+            </div>
+        </div>
+
+        <div class="row">
+            <div>Upload new profile image:</div>
+            <div class="col s6 input-field background-primary btn waves-effect waves-light">
+                <input class="file-path file_bag validate" type="file" id="avatar_bucket">
+            </div>
+            <div class="input-field col s3 offset-s3">
+                <button class="background-primary waves-effect waves-light btn" type="submit">save</button>
+            </div>
+        </div>
+    </form>
+</template>

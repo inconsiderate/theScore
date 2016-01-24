@@ -55,3 +55,25 @@ Template.chooseTeamGame.events({
     }
 });
 
+Template.editUserProfile.events({
+    "submit .edit-user-form": function (event) {
+        var username = event.target.user_name.value,
+            gender = event.target.user_gender.value,
+            age = event.target.user_age.value,
+            single = event.target.user_relationship.value,
+            usermessages = event.target.user_messages_toggle.value,
+            emailnotifications = event.target.email_notifications_toggle.value;
+
+        Meteor.users.update({_id:Meteor.user()._id}, {
+            $set: {
+                "profile.username": username,
+                "profile.gender": gender,
+                "profile.age": age,
+                "profile.usermessages": usermessages,
+                "profile.emailnotifications": emailnotifications,
+                "profile.single": single
+            }
+        });
+    }
+});
+

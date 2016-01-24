@@ -1,6 +1,9 @@
 Template.teams.helpers({
-    teams: function() {
+    myTeams: function() {
         return Teams.find({ members: Meteor.userId() });
+    },
+    otherTeams: function() {
+        return Teams.find({members: {$not: Meteor.userId() }});
     }
 });
 
@@ -13,12 +16,31 @@ Template.teamProfile.events({
 
 
 Template.teams.events({
-    "submit .recordNewGameButton": function() {
+    "submit .leaveTeamButton": function () {
+        // LEAVE TEAM ARE YOU SURE?!?!?!?!
         Router.go('/newScore');
     },
-    "click .teamDetailsButton": function(event) {
+    "click .teamDetailsRouteButton": function (event) {
         var teamId = event.target.value;
-        Router.go('/team/'+teamId);
+        Router.go('/team/' + teamId);
+    },
+    "click .createNewTeamRouteButton": function () {
+        Router.go('/newTeam');
+    },
+    "click .joinSelectedTeam": function(event) {
+        var results = event.target.value;
+        console.log(event);
+        if (results) {
+            Meteor.call("joinTeam", results, function (err, success) {
+                if (error) {
+                    alert(error);
+                    return
+                }
+                Router.go('/teams');
+            });
+        } else {
+            alert('please select a value');
+        }
     }
 });
 
@@ -43,7 +65,6 @@ Template.teamProfile.helpers({
             }
             arr.push(obj);
         }
-        console.log(arr);
         return arr;
 
     },
