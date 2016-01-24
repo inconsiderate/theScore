@@ -32,8 +32,6 @@ Meteor.methods({
     },
 
     joinTeam: function(results) {
-        // add player to Team.members array
-        // add team to User.profile.teams array
         if (results) {
             var teamId = results;
             var user = Meteor.user()._id;
@@ -50,8 +48,14 @@ Meteor.methods({
 
     leaveTeam: function(results) {
         if (results) {
-            // pull user from Team.members
-            // pull team from User.profile.teams
+            var teamId = results;
+            var user = Meteor.user()._id;
+            Teams.update({_id: teamId}, {
+                $pull: {members: user}
+            });
+            Meteor.users.update({_id: user}, {
+                $pull: {"profile.teams": teamId}
+            });
         } else {
             throw new Meteor.erro(000, 'No team specified');
         }
