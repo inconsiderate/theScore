@@ -1,23 +1,3 @@
-Template.teams.helpers({
-    myTeams: function() {
-        var teams = Teams.find({ members: Meteor.userId() });
-        if (teams.count() > 0) {
-            return teams;
-        } else {
-            return null;
-        }
-    },
-    otherTeams: function() {
-        return Teams.find({members: {$not: Meteor.userId() }});
-    }
-});
-
-Template.teamProfile.events({
-    "change #selectedGame": function(event, template) {
-        Session.set("selectedGame", event.target.value);
-    }
-});
-
 Template.teams.events({
     "click .teamDetailsRouteButton": function (event) {
         var teamId = event.target.value;
@@ -48,6 +28,30 @@ Template.teams.events({
     }
 });
 
+Template.teams.helpers({
+    myTeams: function() {
+        var teams = Teams.find({ members: Meteor.userId() });
+        if (teams.count() > 0) {
+            return teams;
+        } else {
+            return null;
+        }
+    },
+    otherTeams: function() {
+        return Teams.find({members: {$not: Meteor.userId() }});
+    }
+});
+
+Template.teamProfile.events({
+    "change #selectedGame": function(event, template) {
+        Session.set("selectedGame", event.target.value);
+    },
+    "click .likeButton": function(){
+        Meteor.call('likeTeamButton', this._id);
+    }
+
+});
+
 Template.teamProfile.helpers({
     teamScore: function(){
         var selectedGame = Session.get("selectedGame"), id = this._id, arr = [],
@@ -70,7 +74,16 @@ Template.teamProfile.helpers({
     },
 
     games: function(){
-        return Games.find({ _id: { $in: this.games } });
+        var games = Games.find({ _id: { $in: this.games } });
+        if (games.count() > 0) {
+            return games;
+        } else {
+            return null;
+        }
+    },
+    likedTeam: function() {
+        var user = Meteor.user();
+        return (contains(user.profile.likedTeams, this._id));
     }
 
 });

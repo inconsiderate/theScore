@@ -1,7 +1,5 @@
+
 Meteor.methods({
-
-
-
     insertTeamScore: function (results) {
         if (Object.keys(results).length > 4 && results.winner) {
             var gameUpdate = TeamScores.findOne({teamID: results.team, gameID: results.game});
@@ -59,5 +57,28 @@ Meteor.methods({
         } else {
             throw new Meteor.erro(000, 'No team specified');
         }
+    },
+    likeTeamButton: function (teamId) {
+        var user = Meteor.user();
+        if (user.profile.likedTeams && contains (user.profile.likedTeams, teamId)) {
+            Teams.update(teamId, {
+                $inc: {likes: -1}
+            });
+            Meteor.users.update({_id:Meteor.user()._id}, {
+                $pull: {
+                    "profile.likedTeams": teamId
+                }
+            })
+        } else {
+            Teams.update(teamId, {
+                $inc: {likes: 1}
+            });
+            Meteor.users.update({_id:Meteor.user()._id}, {
+                $push: {
+                    "profile.likedTeams": teamId
+                }
+            })
+        }
     }
+
 });
