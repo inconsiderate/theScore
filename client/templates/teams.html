@@ -70,7 +70,6 @@
     </div>
 </template>
 
-
 <template name="teamProfile">
     <h2>{{name}}</h2>
     <br>
@@ -123,44 +122,65 @@
     <div>Your team hasn't played any games yet!</div>
     {{/if}}
 
-    <br><br>
-    <div class="ui styled fluid accordion">
-    {{#with teamScore}}
-        <div class="ui styled fluid accordion">
-            <div class="title">
-                <i class="dropdown icon"></i>
-                {{gameTitle gameID}}
-            </div>
-            <div class="content">
-                <div class="ui middle aligned large list">
-                    <div class="item">
-                        <i class="large smile icon"></i>
-                        <div class="content">
-                            <div class="header">Total Wins - {{totalWins}}</div>
-                            {{#each scoresArray}}
-                                <div class="item">
-                                    <div class="description">{{this.key}} Wins - {{this.value}}</div>
+    <br>
+    {{#with singleGameScore}}
+    Total Games Played: {{plays}}
+    <div class="ui segment">
+        <div class="ui stackable grid">
+            {{#each userScores}}
+            <div class="eight wide column">
+                <div class="card">
+
+                    <div class="ui huge header">
+                        {{userName key}}
+                    </div>
+
+                    <div class="content">
+                        <div class="ui middle aligned large list">
+                            <div class="item">
+                                <i class="large smile icon"></i>
+                                <div class="content">
+                                    <div class="header">Total Wins - {{totalWins}}</div>
+                                    {{#each scoresArray}}
+                                        <div class="item">
+                                            <div class="description">{{this.key}} Wins - {{this.value}}</div>
+                                        </div>
+                                    {{/each}}
                                 </div>
-                            {{/each}}
+                            </div>
+                            <div class="item">
+                                <i class="large frown icon"></i>
+                                <div class="content">
+                                    <div class="header">Losses - {{totalLosses}}</div>
+                                </div>
+                            </div>
+                            <div class="item">
+                                <i class="large game icon"></i>
+                                <div class="content">
+                                    <div class="header">Games Played - {{totalGames}}</div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div class="item">
-                        <i class="large frown icon"></i>
-                        <div class="content">
-                            <div class="header">Losses - {{totalLosses}}</div>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <i class="large game icon"></i>
-                        <div class="content">
-                            <div class="header">Games Played - {{totalGames}}</div>
-                        </div>
-                    </div>
+
+
+                    <!--<div class="content">-->
+                        <!--<div class="header">{{userName key}}</div>-->
+                        <!--<div class="meta">Total Wins: </div>-->
+                        <!--<div class="description">-->
+                            <!--<div class="ui list">-->
+                                <!--{{#each scoreValue}}-->
+                                <!--<div class="item"><i>{{key}}</i>: {{value}}</div>-->
+                                <!--{{/each}}-->
+                            <!--</div>-->
+                        <!--</div>-->
+                    <!--</div>-->
                 </div>
             </div>
+            {{/each}}
         </div>
-    {{/with}}
     </div>
+    {{/with}}
 </template>
 
 <template name="newTeam">
@@ -168,9 +188,9 @@
     <br /><br />
     <form class="ui form joinSelectedTeam">
         <div class="field">
-            Enter team name and details here.
+            New team functionality coming soon.
         </div>
-        <button class="fluid ui basic green button">Create Team</button>
+        <button class="fluid ui basic green button disabled">Create Team (coming soon)</button>
     </form>
 
 </template>

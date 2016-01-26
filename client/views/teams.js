@@ -53,21 +53,28 @@ Template.teamProfile.events({
 });
 
 Template.teamProfile.helpers({
-    teamScore: function(){
-        var selectedGame = Session.get("selectedGame"), id = this._id, arr = [],
-        scores = TeamScores.findOne({teamID: id, gameID: selectedGame});
-        for (var key in scores) {
-            if (key == '_id' || key == 'teamID' || key == 'gameID') {
-                continue;
-            }
+
+    singleGameScore: function(){
+        var selectedGame = Session.get("selectedGame"), teamId = this._id;
+        return TeamScores.findOne({teamID: teamId, gameID: selectedGame});
+    },
+
+    userScores: function() {
+        var arr = [];
+        for (var key in this.players) {
             var obj = {};
-            var user =  Meteor.users.find({ _id: key });
-            obj.key = user.profile.username;
-            obj.value = scores[key];
-            for (var faction in obj.value) {
-                console.log(faction);
-                obj.faction[faction] = scores[key];
-            }
+            obj.key = key;
+            obj.value = this.players[key];
+            arr.push(obj);
+        }
+        return arr;
+    },
+    scoreValue: function() {
+        var arr = [];
+        for (var key in this.value) {
+            var obj = {};
+            obj.key = key;
+            obj.value = this.value[key];
             arr.push(obj);
         }
         return arr;
@@ -82,8 +89,7 @@ Template.teamProfile.helpers({
         }
     },
     likedTeam: function() {
-        var user = Meteor.user();
-        return (contains(user.profile.likedTeams, this._id));
+        return (contains(Meteor.user().profile.likedTeams, this._id));
     }
 
 });

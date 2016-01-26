@@ -14,12 +14,13 @@ Meteor.methods({
                 }
                 else {
                     if (results.winner == results[i]) {
-                        playerString = i + "." + results[i];
+                        playerString = "players." + i + "." + results[i];
                         query[playerString] = 1;
                     } else {
-                        playerString = i + ".losses";
+                        playerString = "players." + i + ".losses";
                         query[playerString] = 1;
                     }
+                    query['plays'] = 1;
                 }
             }
             TeamScores.update(gameUpdate, { $inc: query });

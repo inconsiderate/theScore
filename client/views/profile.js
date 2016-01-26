@@ -5,9 +5,10 @@ Template.profile.helpers({
 });
 
 Template.gameAccordion.helpers({
+    //total wins across all TeamScores for this one game. Should include all teams with which I have played this game.
     totalWins: function() {
-        var userId = Meteor.userId();
-        var sum = 0, scores = this[userId];
+        var userId = Meteor.userId(),
+        scores = this.players[userId], sum = 0;
         for (var key in scores) {
             if (key == 'losses') {
                 continue;
@@ -17,21 +18,23 @@ Template.gameAccordion.helpers({
         return sum;
     },
     totalGames: function() {
-        var userId = Meteor.userId();
-        var sum = 0, scores = this[userId];
+        var userId = Meteor.userId(),
+        scores = this.players[userId], sum = 0;
         for (var key in scores) {
             sum += scores[key];
         }
         return sum;
     },
     totalLosses: function() {
-        var userId = Meteor.userId();
-        var scores = this[userId];
+        var userId = Meteor.userId(),
+        scores = this.players[userId];
+
         return scores.losses;
     },
+    //
     scoresArray: function () {
         var userId = Meteor.userId(),
-        arr = [], scores = this[userId];
+        arr = [], scores = this.players[userId];
         for (var key in scores) {
             if (key == 'losses') {
                 continue;
