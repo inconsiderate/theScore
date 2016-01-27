@@ -90,6 +90,24 @@ Template.teamProfile.helpers({
     },
     likedTeam: function() {
         return (contains(Meteor.user().profile.likedTeams, this._id));
+    },
+
+    totalWins: function() {
+        var sum = 0, value = this.value;
+        for (var key in value) {
+            if (key == 'losses') {
+                continue;
+            }
+            sum += value[key];
+        }
+        return sum;
+    },
+    totalGames: function() {
+        var sum = 0, value = this.value;
+        for (var key in value) {
+            sum += value[key];
+        }
+        return sum;
     }
 
 });

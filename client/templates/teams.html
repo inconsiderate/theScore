@@ -132,7 +132,7 @@
                 <div class="card">
 
                     <div class="ui huge header">
-                        {{userName key}}
+                        <a href="/profile/{{key}}" class="item">{{userName key}}</a>
                     </div>
 
                     <div class="content">
@@ -143,16 +143,18 @@
                                     <div class="header">Total Wins - {{totalWins}}</div>
                                     {{#each scoresArray}}
                                         <div class="item">
-                                            <div class="description">{{this.key}} Wins - {{this.value}}</div>
+                                            <div class="description">{{key}} Wins - {{value}}</div>
                                         </div>
                                     {{/each}}
                                 </div>
                             </div>
                             <div class="item">
+                                {{#if value.losses}}
                                 <i class="large frown icon"></i>
                                 <div class="content">
-                                    <div class="header">Losses - {{totalLosses}}</div>
+                                    <div class="header">Losses - {{value.losses}}</div>
                                 </div>
+                                {{/if}}
                             </div>
                             <div class="item">
                                 <i class="large game icon"></i>
